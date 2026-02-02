@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hello, World!</title>
+    <title>Hello, My Personal property!</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -14,7 +14,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Be My Valentine?</title>
+    <title>For You ❤️</title>
     <style>
         :root {
             --primary-pink: #ff4d6d;
@@ -30,152 +30,136 @@
             justify-content: center;
             align-items: center;
             background-color: var(--soft-pink);
-            font-family: 'Arial Rounded MT Bold', 'Helvetica', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow: hidden;
-            touch-action: manipulation;
+            text-align: center;
         }
 
-        .card {
+        .container {
             background: white;
-            padding: 30px;
-            border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
-            text-align: center;
-            width: 85%;
-            max-width: 350px;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             z-index: 10;
-            border: 4px solid white;
+            max-width: 400px;
+            border: 2px solid var(--primary-pink);
         }
 
         h1 {
             color: var(--dark-pink);
-            font-size: 1.8rem;
-            margin-bottom: 10px;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
         }
 
-        .sunflower {
-            font-size: 60px;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .btn-container {
+        .buttons {
             display: flex;
             justify-content: center;
-            align-items: center;
             gap: 20px;
-            margin-top: 30px;
-            height: 100px; /* Space for button to jump */
+            position: relative;
         }
 
         button {
-            padding: 15px 30px;
+            padding: 15px 35px;
             font-size: 1.2rem;
             border-radius: 50px;
             border: none;
             cursor: pointer;
+            transition: transform 0.2s;
             font-weight: bold;
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         #yesBtn {
             background-color: var(--primary-pink);
             color: white;
-            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+        }
+
+        #yesBtn:hover {
+            background-color: var(--dark-pink);
+            transform: scale(1.1);
         }
 
         #noBtn {
-            background-color: #dee2e6;
-            color: #495057;
-            position: relative;
-            z-index: 100;
+            background-color: #6c757d;
+            color: white;
+            position: absolute; /* Needed for the movement script */
+            left: 160px; /* Initial position */
         }
 
-        /* Balloon Animation */
+        /* --- Balloon Animation --- */
         .balloon {
             position: absolute;
-            bottom: -100px;
+            bottom: -150px;
             width: 50px;
             height: 70px;
-            background: rgba(255, 77, 109, 0.6);
+            background: var(--primary-pink);
             border-radius: 50%;
-            animation: float Up 10s infinite ease-in;
+            opacity: 0.7;
             z-index: 1;
+            animation: float 10s infinite linear;
         }
 
-        .balloon::after {
-            content: "🎈";
-            font-size: 40px;
+        .balloon::before {
+            content: "▲";
+            color: var(--primary-pink);
             position: absolute;
-            top: -10px;
-            left: -5px;
+            bottom: -10px;
+            left: 18px;
+            font-size: 12px;
         }
 
-        @keyframes floatUp {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-110vh) rotate(20deg); opacity: 0; }
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(-120vh) rotate(20deg); opacity: 0; }
         }
 
-        /* Celebrate view */
-        .hidden { display: none; }
-        .celebrate h1 { font-size: 2.5rem; color: #ff0054; }
     </style>
 </head>
 <body>
 
-    <div class="balloon" style="left: 10%; animation-delay: 0s;"></div>
-    <div class="balloon" style="left: 30%; animation-delay: 3s;"></div>
-    <div class="balloon" style="left: 55%; animation-delay: 6s;"></div>
-    <div class="balloon" style="left: 80%; animation-delay: 1s;"></div>
-    <div class="balloon" style="left: 90%; animation-delay: 4s;"></div>
+    <script>
+        function createBalloons(num) {
+            for (let i = 0; i < num; i++) {
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.style.left = Math.random() * 100 + 'vw';
+                balloon.style.animationDelay = Math.random() * 5 + 's';
+                balloon.style.backgroundColor = `hsl(${Math.random() * 30 + 330}, 70%, 70%)`;
+                document.body.appendChild(balloon);
+            }
+        }
+        createBalloons(15);
+    </script>
 
-    <div class="card" id="mainCard">
-        <span class="sunflower">🌻</span>
-        <h1 id="question">Will you be my Valentine, Maidamjee?</h1>
-        
-        <div class="btn-container">
-            <button id="yesBtn" onclick="sayYes()">Yes</button>
-            <button id="noBtn" onclick="moveNoButton()" onmouseover="moveNoButton()">No</button>
+    <div class="container">
+        <h1>Will you be 2ta bachha ko mummy ❤️</h1>
+        <div class="buttons">
+            <button id="yesBtn" onclick="celebrate()">Yes</button>
+            <button id="noBtn" onmouseover="moveButton()">No</button>
         </div>
     </div>
 
-    <div class="card hidden" id="happyCard">
-        <span class="sunflower">💖</span>
-        <h1>Yay! I Knew It!</h1>
-        <p>You're stuck with me now! My princess 🌸 ❤️ My Chunumunuu 
-        I Love you ❤️ My chunumunuu 🤤🌻 My Cudieeee 🤤 My Sweety 
-        Every day with you feels like Valentine's Day .I love you, not only for what you are, but for what I am when I am with you. I love you, not only for what you have made of yourself, but for what you are making of me. You are the queen of my heart and the reason I believe in true love 🌻🌹✨</p>
-    </div>
-
     <script>
-        function moveNoButton() {
-            const noBtn = document.getElementById('noBtn');
-            
-            // Calculate random positions
-            // Ensure the button stays within the visible screen area
-            const padding = 50;
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
+        const noBtn = document.getElementById('noBtn');
+
+        // This makes the button jump away when the mouse gets close
+        function moveButton() {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
             
             noBtn.style.position = 'fixed';
-            noBtn.style.left = Math.max(padding, x) + 'px';
-            noBtn.style.top = Math.max(padding, y) + 'px';
-            
-            // Fun little text changes when they miss
-            const phrases = ["No!", "Try again!", "Nope 🤭", "Bhaw khaki!", "Maya lagdaina mero" , "Please!"];
-            noBtn.innerText = phrases[Math.floor(Math.random() * phrases.length)];
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
         }
 
-        function sayYes() {
-            document.getElementById('mainCard').classList.add('hidden');
-            document.getElementById('happyCard').classList.remove('hidden');
-            
-            // Add a little phone vibration for feedback
-            if (navigator.vibrate) {
-                navigator.vibrate([100, 50, 100]);
-            }
+        function celebrate() {
+            document.querySelector('.container').innerHTML = `
+                <h1 style="font-size: 3rem;">YAY! 🥰</h1>
+                <p style="color: #c9184a; font-size: 1.2rem;">I knew you'd say yes Now you are my 2ta baccha ko mummy 
+                I love you my princess!</p>
+                <div style="font-size: 50px;">💖🌸✨</div>
+            `;
+            // Add extra balloons on success
+            createBalloons(30);
         }
     </script>
 </body>
